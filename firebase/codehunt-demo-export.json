@@ -1,0 +1,27 @@
+{
+  "products" :
+  {
+    "1" : {
+      "description" : "Code for anyone",
+      "link" : "https://langmine.com",
+      "maker" : {
+        "avatar" : "/img/hieu.jpeg",
+        "name" : "hieu"
+      },
+      "name" : "Codecademy",
+      "media" : "/img/codecademy.jpeg",
+      "upvote" : 169
+    },
+    "2" : {
+      "description" : "Code for startups",
+      "link" : "https://code4startup.com",
+      "maker" : {
+        "avatar" : "/img/leo.jpeg",
+        "name" : "leo"
+      },
+      "name" : "Code4Startup",
+      "media" : "/img/code4startup.jpeg",
+      "upvote" : 278
+    }
+  }
+}
