@@ -3,3 +3,4 @@ public/js/*
 !.gitkeep
 .DS_Store
 .env
+src/react-components/env/*

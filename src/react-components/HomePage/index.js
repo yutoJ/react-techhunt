@@ -1,39 +1,39 @@
 import React from 'react';
 import ProductList from '../Product/ProductList';
+import Firebase from 'firebase';
 
 class HomePage extends React.Component{
   constructor() {
     super();
     this.state = {
-      productList: [
-        {
-          id: 1,
-          name: 'Codecademy',
-          link: 'https://codecademy.com',
-          media: '/img/codecademy.jpeg',
-          upvote: 169,
-          description: 'Code for anyone',
-          maker: {
-            name: 'hieu',
-            avatar: '/img/hieu.jpeg'
-          }
-        },
-        {
-          id: 2,
-          name: 'Code4Startup',
-          link: 'https://code4startup.com',
-          media: '/img/code4startup.jpeg',
-          upvote: 278,
-          description: 'Code for startups',
-          maker: {
-            name: 'leo',
-            avatar: '/img/leo.jpeg'
-          }
-        }
-      ]
+      productList: []
     }
-  }
+    var DB_PARAM = require("../env/conf");
+    var config = {
+      //apiKey: API_KEY,
+      //authDomain: process.env.AUTH_DOMAIN,
+      //databaseURL: process.env.DB_URL,
+      //projectId: process.env.PJ_ID,
+      //storageBucket: process.env.SB,
+      //messagingSenderId: process.env.MSD
+      apiKey: DB_PARAM.API_KEY,
+      authDomain: DB_PARAM.AUTH_DOMAIN,
+      databaseURL: DB_PARAM.DB_URL,
+      projectId: DB_PARAM.PJ_ID,
+      storageBucket: DB_PARAM.SB,
+      messagingSenderId: DB_PARAM.MSID
+    };
 
+    Firebase.initializeApp(config);
+
+    Firebase.database().ref('products').on('value', (snapshot) => {
+      var products = snapshot.val();
+
+      this.setState({
+        productList: products
+      })
+    });
+  }
   render() {
     return (
       <section>

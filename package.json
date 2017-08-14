@@ -15,10 +15,15 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babelify": "^7.3.0",
+    "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "firebase": "^4.2.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "watch": "^1.0.2"
+  },
+  "devDependencies": {
+    "babel-preset-react-native": "^2.1.0",
+    "react-native-dotenv": "^0.1.0"
   }
 }
