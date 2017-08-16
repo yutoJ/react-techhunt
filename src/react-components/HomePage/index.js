@@ -2,12 +2,17 @@ import React from 'react';
 import ProductList from '../Product/ProductList';
 import Firebase from 'firebase';
 
+import connectToStores from 'alt-utils/lib/connectToStores';
+import ProductStore from '../../stores/ProductStore';
+import Actions from '../../actions';
+
+@connectToStores
 class HomePage extends React.Component{
   constructor() {
     super();
-    this.state = {
-      productList: []
-    }
+    //this.state = {
+    //  productList: []
+    //}
     var DB_PARAM = require("../env/conf");
     var config = {
       //apiKey: API_KEY,
@@ -26,13 +31,20 @@ class HomePage extends React.Component{
 
     Firebase.initializeApp(config);
 
-    Firebase.database().ref('products').on('value', (snapshot) => {
-      var products = snapshot.val();
+    //Firebase.database().ref('products').on('value', (snapshot) => {
+    //  var products = snapshot.val();
 
-      this.setState({
-        productList: products
-      })
-    });
+    //  this.setState({
+    //    productList: products
+    //  })
+    //});
+    Actions.getProducts();
+  }
+  static getStores() {
+    return [ProductStore];
+  }
+  static getPropsFromStores() {
+    return ProductStore.getState();
   }
   render() {
     return (
@@ -44,9 +56,9 @@ class HomePage extends React.Component{
         <section>
           <section className="container">
             {
-              this.state.productList
+              this.props.products
               ?
-              <ProductList productList={this.state.productList}/>
+              <ProductList productList={this.props.products}/>
               :
               null
             }

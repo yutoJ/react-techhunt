@@ -55,6 +55,19 @@ class Actions {
     }
   }
 
+  getProducts() {
+    return(dispatch) => {
+      Firebase.database().ref('products').on('value', function(snapshot) {
+        var products = snapshot.val();
+        dispatch(products);
+      });
+    }
+  }
+  addProduct(product) {
+    return (dispatch) => {
+      Firebase.database().ref('products').push(product);
+    }
+  }
 }
 
 export default alt.createActions(Actions);
