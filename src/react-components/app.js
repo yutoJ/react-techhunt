@@ -10,7 +10,7 @@ import Actions from '../actions';
 class App extends React.Component {
   constructor() {
     super();
-    //Actions.initSession();
+    Actions.initSession();
   }
 
   static getStores() {

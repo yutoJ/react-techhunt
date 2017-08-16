@@ -1,5 +1,24 @@
 import alt from '../alt';
 import Firebase from 'firebase';
+import _ from 'lodash';
+
+var DB_PARAM = require("../react-components/env/conf");
+var config = {
+  //apiKey: API_KEY,
+  //authDomain: process.env.AUTH_DOMAIN,
+  //databaseURL: process.env.DB_URL,
+  //projectId: process.env.PJ_ID,
+  //storageBucket: process.env.SB,
+  //messagingSenderId: process.env.MSD
+  apiKey: DB_PARAM.API_KEY,
+  authDomain: DB_PARAM.AUTH_DOMAIN,
+  databaseURL: DB_PARAM.DB_URL,
+  projectId: DB_PARAM.PJ_ID,
+  storageBucket: DB_PARAM.SB,
+  messagingSenderId: DB_PARAM.MSID
+};
+
+Firebase.initializeApp(config);
 
 class Actions {
 
@@ -58,7 +77,7 @@ class Actions {
   getProducts() {
     return(dispatch) => {
       Firebase.database().ref('products').on('value', function(snapshot) {
-        var products = snapshot.val();
+        var products = _.values(snapshot.val());
         dispatch(products);
       });
     }
