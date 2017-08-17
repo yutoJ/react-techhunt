@@ -77,14 +77,34 @@ class Actions {
   getProducts() {
     return(dispatch) => {
       Firebase.database().ref('products').on('value', function(snapshot) {
-        var products = _.values(snapshot.val());
+        var productsValue = snapshot.val();
+        var products = _(productsValue).keys().map((productKey) => {
+          var item = _.clone(productsValue[productKey]);
+          item.key = productKey;
+          return item;
+        })
+        .value();
         dispatch(products);
       });
     }
   }
-  addProduct(product) {
+
+  addVote(productId, userId) {
     return (dispatch) => {
-      Firebase.database().ref('products').push(product);
+      var voteRef = Firebase.database().ref('votes/'+productId+'/'+userId);
+      var upvoteRef = Firebase.database().ref('products/'+productId+'/upvote');
+
+      voteRef.on('value', function(snapshot) {
+        if(snapshot.val() == null) {
+          voteRef.set(true);
+
+          var vote = 0;
+          upvoteRef.on('value', function(snapshot) {
+            vote = snapshot.val();
+          });
+          upvoteRef.set(vote+1);
+        }
+      });
     }
   }
 }
