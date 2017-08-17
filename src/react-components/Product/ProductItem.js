@@ -74,7 +74,7 @@ class ProductItem extends React.Component {
         <img className="product-item-media" src={this.props.media} />
         {this.renderInfoSession()}
         {this.renderNewWindowIcon()}
-        <ProductPopup status={this.state.productPopupStatus} hidePopup={this.hideProductPopup}/>
+        <ProductPopup {...this.props} status={this.state.productPopupStatus} hidePopup={this.hideProductPopup}/>
       </li>
     );
   }
